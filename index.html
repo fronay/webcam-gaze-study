@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	 <head>
+		  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+		  <title>Trial Experiment</title>
+		  <link rel="stylesheet" type="text/css" href="styles/style.css">
+		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		  <link rel="stylesheet" type="text/csv" link="RundenVorgaben.csv">
+		  <script src="scripts/jquery-3.2.1.min.js"></script>
+		  <script src="scripts/webgazer.js"></script>
+		  <script src="scripts/d3.js"></script>
+		  <script src="scripts/main.js"> </script>
+		  <!--script src="scripts/MEGAMAIN.js"></script-->
+		  
+	 </head>
+	 <body id="superbody" lang="en-US" link="#0000ff" dir="LTR">
+
+	<div class="vertical-center">	
+	<div class="container">
+<!-- Screen 1: Participant ID -->
+
+	<div id="participant-id-div">
+		<p>Willkommen zu der Aufmerksamkeitsaufgabe!</p>
+		<p>Bitte geben Sie Ihre Teilnehmernummer ein.</p>
+		<form>
+			Teilnehmer-Nummer: <input id="participant-id-input" type="text" name="participant-id"><br>
+			<div class="buttonbox">
+		  		<button id="participant-id-submit-button" type="button"> Weiter </button>
+		  	</div>
+		</form>
+	</div>
+
+	<div id="calibrationPopUp"> 
+		<div id="little-calibration-msg">(Kalibrierung...) </div>
+	</div>
+	<div id="wrapper"></div>
+<!--<div id="clicker" style="width:10px;height:10px;position:absolute;background-color:red;z-index:2;">
+</div>-->
+<!-- Instructions -->
+	<div id="instructions">
+		<!-- Screen 2: Welcome Message -->
+		<div id="welcome-msg" class="col-lg-6 col-lg-offset-4 col-md-6 col-md-offset-2">
+			<p><strong>Instruktionen</strong>:</p>
+			<p>In dieser Aufgabe lernen Sie Kombinationen von Fraktalbildern und Münzen. Sie werden zwei unterschiedliche Fraktalbilder zu sehen bekommen, die entweder von einer Münze gefolgt werden oder von einem gelblichen Kreis. Wenn die Münze erscheint verdienen Sie diesen Betrag tatsächlich. Am Ende der Aufgabe wird Ihnen die Summe aller gezeigten Münzen ausgezahlt.
+			</p>
+			<div class="buttonbox">	
+				<button class="next-button" type="button"> Weiter </button>
+			</div>
+		</div>
+
+		<!-- Screen 3: Screenshot of fractal -->
+		<div id="fractal-example" class="col-lg-6 col-lg-offset-4 col-md-6 col-md-offset-2">
+			<p> Dies ist ein Beispiel eines Fraktalbildes:</p>
+			<div>
+				<img class="demo-pic" src="img/fractal.jpg" alt="Bild eines Fraktals">
+			</div>
+			<p> (*Kommentar: Kann auch durch einen screenshot des eigentlichen Bildschirms ersetzt werden *)</p>
+			<div class="buttonbox">	
+				<button class="next-button" type="button"> Weiter </button>
+			</div>
+		</div>
+
+		<!-- Screen 4: Screenshot of coin -->
+		<div id="coin-example" class="col-lg-6 col-lg-offset-4 col-md-4 col-md-offset-4">
+			<p> Dies ist ein Beispiel eines Münzbildes: </p>
+			<div>
+				<img class="demo-pic" src="img/10c.png" alt="Bild einer Münze">
+			</div>
+			<p> (*Kommentar: Kann auch durch einen screenshot des eigentlichen Bildschirms ersetzt werden *)</p>
+			<div class="buttonbox">	
+			<button class="next-button" type="button"> Weiter </button>
+			</div>
+		</div>
+		
+		<!-- Screen 5: Round instructions -->
+		<div id="round-instructions" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+			<p> In jeder Runde wird die Münz- oder Kreisabbildung von einem Rechteck verdeckt. Sobald Sie das Rechteck sehen, können Sie es mit einem <strong>Klick auf die Leertaste</strong>	entfernen, um zu enthüllen welche Abbildung sich dahinter verbirgt. </p>
+			<p> Bitte beachten Sie, dass das Erscheinen der Münz- oder Kreisabbildung <strong>NICHT</strong> abhängig ist von Ihrem Knopfdruck! Wenn Sie keine Taste drücken, verschwindet das Rechteck automatisch nach 1.5 Sekunden. </p>
+			<p> Sie werden den Ablauf einer Runde jetzt einmal üben. </p>
+			<div>
+				<button class="next-button" type="button"> Weiter </button>
+			</div>
+		</div>
+		<!-- TODO: Screen 5b: Take of your glasses and headphones!! -->
+	</div>
+
+<!-- (Screen 6 & 8 : included in experiment screen -->
+<!-- Screen 7: no-click demo -->
+	<div id="no-click-demo-round" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p> Sie werden jetzt noch eine Übungsrunde spielen, aber dieses Mal drücken Sie bitte KEINEN Knopf, wenn das Rechteck erscheint! Schauen Sie einfach mal was dann passiert!
+		</p>
+		<div>
+			<button id="no-click-round-next-button" type="button"> Weiter </button>
+		</div>
+	</div>
+
+	
+<!-- Screen 9: no-click demo -->
+	<div id="that-was-easy-msg" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p> Wie Sie sehen, ist die Aufgabe nicht schwierig. Die Aufgabe wird maximal 10 Minuten dauern. Während der Aufgabe messen wir auch Ihre Augenbewegungen mittels der Webcam. Bevor die Aufgabe anfängt werden wir jetzt die Webcam erst an Ihre Augenbewegungen anpassen. </p>
+		<div>
+			<button id="next-calibration-msg-button" type="button"> Weiter </button>
+		</div>
+	</div>
+
+
+<!-- Screen 9b:  -->
+	<div id="click-the-icons-msg" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p> Bei der Kalibrierung wird auf dem Bildschirm mehrmals an verschiedenen Stellen ein Ziel-Symbol gezeigt. Klicken sie bitte mit der Maus auf die Mitte des Symbols, wenn es erscheint. WICHTIG: Schauen Sie dabei das Symbol <strong>direkt</strong> an, nur so funktioniert die Kalibrierung der Webcam.</p>
+		<img id="sample-calibration-img" src="img/sample_calibration.png" alt="">
+		<p> (*Kommentar: kann von anderem screenshot ersetzt werden*) </p>
+		<div>
+			<button id="start-calibration-button" type="button"> Weiter </button>
+		</div>
+	</div>
+
+<!-- (Screen 10: About to start)-->
+	<div id="about-to-start-msg" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p> Kalibration vorerst beendet - allerdings wird zwischen jeder 2. Frage die Kalibration kurz wiederholt. Die Aufgabe fängt jetzt an.</p>
+		<p id="pre-loop-countdown"> </p>
+	</div>
+<!-- Gaze display element -->
+	<div id="reticle">
+		<img src="img/reticle.png" alt="reticle">
+	</div>
+
+<!-- (3 + 30)x STIMULUS SCREEN -->
+	<!--Calibration & Stimulus Zone-->
+	<!-- Mouse-only calibration message -->
+	<div id="mouse-calib" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p id="first-mouse-calib"> Schauen Sie auf das Zielsymbol <strong> und klicken Sie darauf. </strong> </p>
+		<!--<p id="second-mouse-calib"> Und noch einmal...</p>-->
+	</div>
+	<!-- Eye-only calibration message -->
+	<div id="eye-calib" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+		<p> Nächste Phase: </p>
+		<p> Diesmal verwenden Sie <strong>nicht</strong> die Maus, sondern versuchen sie das Symbol nur <strong> durch kurzes Hinblicken </strong>  anzuwählen. </p>
+	</div>
+
+	<!-- actual stimulus -->
+	<div id="experiment-screen">
+		<header>
+		  <div class="row header-row col-lg-5 col-off-set-4 col-md-8 col-md-offset-4">
+				<!--div class="overlay-placeholder">  </div-->
+				<div id="experiment-instruction-div">
+					Drücken Sie jetzt die LEERTASTE um das Rechteck zu entfernen!
+				</div>
+			</div>
+		</header>
+		 <div class="row stimulus-row">
+			 <div id="left-gaze" class="col-lg-4 col-md-4 stimulus-col">
+				<!--h1 class="col-descriptor">fractal</h1-->
+				<div class="imgbox" id="left-imgbox">
+					<img id="fractal-img" class="stimulus-img" src="img/fractal.jpg" alt="fractal_image">
+					<img id="left-mark" class="calibration-img" src="img/mark.png" alt="calibration mark">
+				</div>
+			 </div>
+			 <div id="center-gaze" class="col-lg-4 col-md-4 stimulus-col">
+				<!--h1 class="col-descriptor">calib</h1-->
+				<div class="imgbox" id="center-imgbox">
+					<img id="center-mark" class="calibration-img" src="img/mark.png" alt="calibration mark">
+					<img id="fixation-sign" class="calibration-img" src="img/fixation.png" alt="fixation mark">
+				</div>
+			 </div>
+			 <div id="right-gaze" class="col-lg-4 col-md-4 stimulus-col">
+				<!--h1 class="col-descriptor">reward</h1-->
+				<div class="imgbox" id="right-imgbox">
+					<img id="reward-img" class="stimulus-img" src="img/10c.png" alt="fractal_image">
+					<img id="right-mark" class="calibration-img" src="img/mark.png" alt="calibration mark">
+				</div>
+			 </div>
+		 </div>
+	</div>
+
+<!-- 1x END SCREEN -->
+	<div id="end-screen">
+		<div id="outcome-presentation" class="col-lg-5 col-lg-offset-4 col-md-8 col-md-offset-4">
+			<p>Dies ist das Ende dieser Aufgabe.</p>
+			<!--<p>Sie haben <strong id="end-amount"></strong>Euro verdient</p>-->
+			<p>Vielen Dank!</p>
+		</div>
+	</div>
+
+
+<!--  Special buttons	-->
+	<div id="quitbuttondiv">
+			<p>Vorzeitig Beenden?</p>
+			<button id="quit-button">JA</button>
+			<button id="dont-quit-button">NEIN</button>
+	</div>
+
+	<div id="drawbuttondiv">
+			<p>Visualisierung der letzen Runde zeigen?</p>
+			<button id="draw-button">JA</button>
+			<button id="dont-draw-button">NEIN</button>
+	</div>
+	
+	</div>
+	</div>	
+	 </body>
+</html>
+
+
+
+
+
+
+
